@@ -1,19 +1,28 @@
-
 import scala.collection.mutable
-import scala.io.StdIn.readLine
+import scala.io.StdIn.{readChar, readLine}
 
 class TowerOfHanoi(var isGameFinished: Boolean) {
 
   val towers: Array[mutable.Stack[Int]] = {
-    var rings = 0
+    var n = 0
+    var ringsAmount = 0
+
+    def myReadChar(prompt: String): Char = {
+      print(prompt)
+      java.lang.System.out.flush()
+      readChar()
+    }
+
     do {
-      rings = readLine("Set height of Hanoi Tower (from 3 to 8):  ").toInt
-    } while (!(3 to 8 contains (rings)))
-    Array(mutable.Stack[Int]() pushAll (rings to 1 by -1), mutable.Stack[Int](), mutable.Stack[Int]())
+      ringsAmount = myReadChar("Set height of Hanoi Tower (from 3 to 8):  ").toInt
+      ringsAmount -=48
+      if (!(3 to 8 contains (ringsAmount))) println("Wrong input! Try again. ")
+    } while (!(3 to 8 contains (ringsAmount)))
+    Array(mutable.Stack[Int]() pushAll (ringsAmount to 1 by -1), mutable.Stack[Int](), mutable.Stack[Int]())
   }
 
   def printTowers(towers: Array[mutable.Stack[Int]]): Unit = {
-    val towersName = List("A ","B ","C ")
+    val towersName = List("A ", "B ", "C ")
     for (n <- 0 to 2) println(towersName(n) + towers(n).reverse)
   }
 
@@ -35,8 +44,11 @@ class TowerOfHanoi(var isGameFinished: Boolean) {
     }
   }
 
-  val isFinished: (Array[mutable.Stack[Int]]) => Boolean = towers =>{
-    if(towers(0).isEmpty && towers(1).isEmpty) true
+  val isFinished: (Array[mutable.Stack[Int]]) => Boolean = towers => {
+    if (towers(0).isEmpty && towers(1).isEmpty) {
+      printTowers(towers)
+      true
+    }
     else false
   }
 }

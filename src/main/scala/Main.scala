@@ -6,6 +6,5 @@ object Main extends App {
     game.makeMove(game.towers, player)
   }while (!game.isFinished(game.towers));
 
-
   println("Wygrana! Koniec gry! ")
 }
