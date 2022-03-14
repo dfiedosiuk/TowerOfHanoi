@@ -30,3 +30,16 @@ println(3 to 8 contains(203) )
 
 z.pushAll(6 to 0 by -1 )
 z.top
+
+x.push(z.pop)
+x
+z
+y
+
+z.top > x.top
+
+val numbers = Array (1,2,3,4,5)
+
+
+
+for (n <- 0 to 2) println(numbers(n))

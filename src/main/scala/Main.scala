@@ -1,14 +1,11 @@
 object Main extends App {
-  var player1 = new Player("Player 1", true, false)
-  var player2 = new Player("Player 2", true, false)
-
+  var player = new Player
   val game = new TowerOfHanoi(false)
-  game.setTower()
 
   do {
-    val actualMove = player1.declareMove()
-    println(actualMove)
-  } while (true);
+    game.makeMove(game.towers, player)
+  }while (!game.isFinished(game.towers));
 
-  println("Koniec gry! ")
+
+  println("Wygrana! Koniec gry! ")
 }
